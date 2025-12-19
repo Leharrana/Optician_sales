@@ -89,7 +89,7 @@ const OpticiansDashboard = () => {
 
   // Fixed Navigation Bar Component
   const NavigationBar = () => (
-    <div className="sticky top-0 z-50 bg-white shadow-md border-b-2 border-stone-200 mb-4">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md border-b-2 border-stone-200">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <button
           onClick={() => {
@@ -128,7 +128,7 @@ const OpticiansDashboard = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-stone-100">
         <NavigationBar />
-        <div className="max-w-6xl mx-auto px-2 sm:px-4 pb-4">
+        <div className="max-w-6xl mx-auto px-2 sm:px-4 pb-4 pt-20">
           {/* Header with Logo */}
           <div className="mb-4 sm:mb-6">
             <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 border-2 border-stone-200">
@@ -291,7 +291,7 @@ const OpticiansDashboard = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-stone-100">
         <NavigationBar />
-        <div className="max-w-4xl mx-auto px-2 sm:px-4 pb-4">
+        <div className="max-w-4xl mx-auto px-2 sm:px-4 pb-4 pt-20">
           <div className="bg-stone-50 rounded-xl shadow-lg border-2 border-stone-200 p-4 sm:p-8">
             <div className="text-center mb-6 sm:mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-stone-800 mb-2">
@@ -345,7 +345,7 @@ const OpticiansDashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-emerald-50">
       <NavigationBar />
-      <div className="max-w-6xl mx-auto px-2 sm:px-4 pb-4">
+      <div className="max-w-6xl mx-auto px-2 sm:px-4 pb-4 pt-20">
         <div className="bg-white rounded-lg sm:rounded-xl shadow-lg border-2 border-stone-200 p-3 sm:p-6 mb-3 sm:mb-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-3 sm:mb-4">
             <div className="flex items-center gap-2 sm:gap-3">
