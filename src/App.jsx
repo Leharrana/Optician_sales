@@ -129,8 +129,8 @@ const OpticiansDashboard = () => {
       <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-stone-100">
         <NavigationBar />
         <div className="max-w-6xl mx-auto px-2 sm:px-4 pb-4 pt-20">
-          {/* Header with Logo */}
-          <div className="mb-4 sm:mb-6">
+          {/* Header with Logo - FIXED STICKY */}
+          <div className="sticky top-16 z-40 mb-4 sm:mb-6">
             <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 border-2 border-stone-200">
               <div className="flex items-center justify-center mb-3 sm:mb-4">
                 <div className="text-center">
@@ -152,56 +152,67 @@ const OpticiansDashboard = () => {
                 </div>
               </div>
               
-              {/* FIXED: Date and Diary Average - Now Stacked on Mobile */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mt-3 sm:mt-4">
-                <div className="flex items-center gap-2 w-full sm:w-auto">
-                  <label className="text-xs sm:text-sm text-stone-600 font-medium whitespace-nowrap">Date:</label>
-                  <input
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    className="px-2 sm:px-3 py-1 border-2 border-stone-300 rounded-lg text-xs sm:text-sm font-medium text-stone-700 hover:border-emerald-400 transition cursor-pointer flex-1 sm:flex-none"
-                  />
-                </div>
-                <p className="text-emerald-700 font-semibold text-xs sm:text-sm w-full sm:w-auto text-left sm:text-center">
+              {/* NEW: Diary Average So Far */}
+              <div className="text-center mt-3 sm:mt-4 mb-3 sm:mb-4">
+                <p className="text-emerald-700 font-semibold text-sm sm:text-base mb-2">
                   Diary Average So Far
                 </p>
+                <p className="text-stone-600 font-medium text-xs sm:text-sm mb-2">
+                  Complete as of:
+                </p>
+                <input
+                  type="date"
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  className="px-3 sm:px-4 py-2 border-2 border-stone-300 rounded-lg text-xs sm:text-sm font-medium text-stone-700 hover:border-emerald-400 transition cursor-pointer"
+                />
               </div>
             </div>
           </div>
 
-          {/* Summary Cards */}
+          {/* Summary Cards - UPDATED LAYOUT */}
           <div className="mb-3 sm:mb-4">
-            <div className="grid grid-cols-3 gap-1 sm:gap-2 max-w-full">
-              <div className="bg-emerald-100 rounded-lg sm:rounded-xl p-2 sm:p-3 shadow-lg border border-emerald-200 flex items-center justify-center">
-                <h2 className="text-base sm:text-2xl font-bold text-emerald-800 text-center">All Diary</h2>
-              </div>
-              
-              <div className="bg-emerald-100 rounded-lg sm:rounded-xl p-2 sm:p-3 shadow-lg border border-emerald-200 flex items-center justify-center">
-                <div className="w-full">
-                  <p className="text-emerald-700 text-[10px] sm:text-xs font-medium mb-0.5 sm:mb-1 text-center">Average Sale</p>
-                  <h2 className="text-base sm:text-2xl font-bold text-emerald-800 text-center">{formatCurrency(getOverallAverage())}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 max-w-full">
+              {/* All Diary Box with No. of Diary and Click to view */}
+              <div className="bg-emerald-100 rounded-lg sm:rounded-xl shadow-lg border border-emerald-200 overflow-hidden">
+                <div className="p-3 sm:p-4 flex items-center justify-center border-b border-emerald-200">
+                  <h2 className="text-lg sm:text-2xl font-bold text-emerald-800 text-center">All Diary</h2>
+                </div>
+                <div className="bg-emerald-50 px-3 py-2 flex items-center justify-between">
+                  <span className="text-xs sm:text-sm text-emerald-700 font-medium">
+                    No. of Diary: {numberOfDiary}
+                  </span>
                 </div>
               </div>
               
-              <div className="bg-emerald-100 rounded-lg sm:rounded-xl p-2 sm:p-3 shadow-lg border border-emerald-200">
+              {/* Average Breakdown - Numbers First */}
+              <div className="bg-emerald-100 rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-lg border border-emerald-200">
                 {(() => {
                   const avgBreakdown = getAverageBreakdown();
                   return (
-                    <div className="flex flex-col justify-center h-full space-y-0.5 sm:space-y-1">
-                      <div className="text-center">
-                        <p className="text-emerald-700 text-[9px] sm:text-xs font-medium">
-                          AVG FEES - {formatCurrency(avgBreakdown.fees)}
+                    <div className="flex flex-col justify-center h-full space-y-2">
+                      <div className="flex items-center justify-between">
+                        <p className="text-base sm:text-xl font-bold text-emerald-800">
+                          {formatCurrency(avgBreakdown.fees)}
+                        </p>
+                        <p className="text-emerald-700 text-xs sm:text-sm font-medium text-right">
+                          AVG FEES
                         </p>
                       </div>
-                      <div className="text-center">
-                        <p className="text-emerald-700 text-[9px] sm:text-xs font-medium">
-                          AVG FRAME - {formatCurrency(avgBreakdown.frame)}
+                      <div className="flex items-center justify-between">
+                        <p className="text-base sm:text-xl font-bold text-emerald-800">
+                          {formatCurrency(avgBreakdown.frame)}
+                        </p>
+                        <p className="text-emerald-700 text-xs sm:text-sm font-medium text-right">
+                          AVG FRAME
                         </p>
                       </div>
-                      <div className="text-center">
-                        <p className="text-emerald-700 text-[9px] sm:text-xs font-medium">
-                          AVG LENS - {formatCurrency(avgBreakdown.lens)}
+                      <div className="flex items-center justify-between">
+                        <p className="text-base sm:text-xl font-bold text-emerald-800">
+                          {formatCurrency(avgBreakdown.lens)}
+                        </p>
+                        <p className="text-emerald-700 text-xs sm:text-sm font-medium text-right">
+                          AVG LENS
                         </p>
                       </div>
                     </div>
@@ -242,28 +253,25 @@ const OpticiansDashboard = () => {
                       </div>
                     </div>
 
-                    <div className="bg-white p-2 sm:p-3">
-                      <div className="space-y-1 sm:space-y-2">
-                        <div className="w-full pb-1 sm:pb-2 border-b border-stone-300">
-                          <p className="text-stone-700 text-[10px] sm:text-xs font-semibold mb-0.5 text-center">FEES</p>
-                          <p className="text-sm sm:text-lg font-bold text-stone-800 text-center">{formatCurrency(data.fees)}</p>
+                    <div className="bg-white p-2 sm:p-3 border-r border-stone-300">
+                      <div className="space-y-2 sm:space-y-3">
+                        <div className="w-full pb-2 border-b border-stone-300 flex items-center justify-between">
+                          <p className="text-base sm:text-xl font-bold text-stone-800">{formatCurrency(data.fees)}</p>
+                          <p className="text-stone-700 text-[10px] sm:text-xs font-semibold text-right">FEES</p>
                         </div>
-                        <div className="w-full pb-1 sm:pb-2 border-b border-stone-300">
-                          <p className="text-stone-700 text-[10px] sm:text-xs font-semibold mb-0.5 text-center">FRAME AMOUNT</p>
-                          <p className="text-sm sm:text-lg font-bold text-stone-800 text-center">{formatCurrency(data.frame)}</p>
+                        <div className="w-full pb-2 border-b border-stone-300 flex items-center justify-between">
+                          <p className="text-base sm:text-xl font-bold text-stone-800">{formatCurrency(data.frame)}</p>
+                          <p className="text-stone-700 text-[10px] sm:text-xs font-semibold text-right">FRAME AMOUNT</p>
                         </div>
-                        <div className="w-full pt-1 sm:pt-2">
-                          <p className="text-stone-700 text-[10px] sm:text-xs font-semibold mb-0.5 text-center">LENS AMOUNT</p>
-                          <p className="text-sm sm:text-lg font-bold text-stone-800 text-center">{formatCurrency(data.lens)}</p>
+                        <div className="w-full pt-1 flex items-center justify-between">
+                          <p className="text-base sm:text-xl font-bold text-stone-800">{formatCurrency(data.lens)}</p>
+                          <p className="text-stone-700 text-[10px] sm:text-xs font-semibold text-right">LENS AMOUNT</p>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-r from-emerald-50 to-green-50 px-3 sm:px-4 py-1.5 sm:py-2 flex items-center justify-between border-t border-stone-200">
-                    <span className="text-[10px] sm:text-xs text-emerald-700 font-medium">
-                      No. of Diary: {numberOfDiary}
-                    </span>
+                  <div className="bg-gradient-to-r from-emerald-50 to-green-50 px-3 sm:px-4 py-1.5 sm:py-2 flex items-center justify-center border-t border-stone-200">
                     <span className="text-[10px] sm:text-xs text-emerald-700 font-medium flex items-center gap-1">
                       Click to view calendar
                       <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -341,7 +349,7 @@ const OpticiansDashboard = () => {
     );
   }
 
-  // Page 2 - Calendar - FIXED: Smaller numbers that fit in boxes
+  // Page 2 - Calendar
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-emerald-50">
       <NavigationBar />
@@ -386,7 +394,6 @@ const OpticiansDashboard = () => {
                   </div>
                 </div>
 
-                {/* FIXED: Calendar Grid with Responsive Text Sizes */}
                 <div className="grid grid-cols-7 gap-1 sm:gap-2">
                   <div className="text-center font-bold text-[10px] sm:text-xs text-stone-600 py-1 sm:py-2">Sun</div>
                   <div className="text-center font-bold text-[10px] sm:text-xs text-stone-600 py-1 sm:py-2">Mon</div>
@@ -407,7 +414,6 @@ const OpticiansDashboard = () => {
                     return emptyCells;
                   })()}
 
-                  {/* FIXED: Day cells with smaller, responsive text */}
                   {dailySales.map(({ day, total, fees, frame, lens }) => (
                     <div
                       key={day}
